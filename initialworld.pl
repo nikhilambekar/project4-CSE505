@@ -38,6 +38,6 @@ getallpaths(Start, End, InterPaths, DistAcc, Visited, TotDist):-
 
 getallpaths(Start, End, InterPaths, DistAcc, Visited, TotDist):-
 	path(Start, InterPoint, Dist, _),
-	\+ member(InterPoint, InterPaths),
+	not (member(InterPoint, InterPaths)),
 	NewDistAcc is DistAcc + Dist,
 	getallpaths(InterPoint, End, [InterPoint|InterPaths], NewDistAcc, Visited, TotDist).
