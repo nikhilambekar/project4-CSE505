@@ -1,4 +1,37 @@
+/* One more initial state
+   Refer to shortest-path.png
+
+path(a, b, 15, _).
+path(b, h, 12, _).
+path(h, i, 11, _).
+path(i, d, 99, _).
+path(d, a, 5, _).
+path(a, c, 13, _).
+path(c, b, 2, _).
+path(d, c, 18, _).
+path(b, f, 8, _).
+path(f, h, 17, _).
+path(c, f, 6, _).
+path(f, g, 16, _).
+path(h, g, 7, _).
+path(g, i, 10, _).
+path(e, d, 4, _).
+path(e, c, 3, _).
+path(e, f, 1, _).
+path(e, g, 9, _).
+path(e, i, 14, _).
+path(X, Y, Dist):- path(Y, X, Dist).
+
+taxiRate(2).
+walkLimit(15).
+
+package(a, g).
+package(a, e).
+package(g, b).
+   */
+
 % Initial State
+
 % path (Source, Destination, Cost, Weather).
 path(a, e, 5, sunny).
 path(e, d, 10, rainy).
