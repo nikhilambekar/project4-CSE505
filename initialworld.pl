@@ -28,8 +28,9 @@ package(b, e).
 
 taxi(X, Y, Cost):- path(X, Y, Dist, _), taxiRate(Rate), Cost is D * Rate.
 
-getallpathsMain(Start, End,Visited, Cost):-
-	aggregate(min(C,V),getallpaths(Start, End, [Start], 0, V, C),min(Cost,Visited)).
+getallpathsMain(Visited, Cost):-
+	package(Start, End),
+	getallpaths(Start, End, [Start], 0, Visited, Cost).
 
 getallpaths(Start, End, InterPaths, DistAcc, Visited, TotDist):-
 	path(Start, End, Distance, _),
