@@ -23,7 +23,7 @@ path(e, i, 14, _).
 path(X, Y, Dist):- path(Y, X, Dist).
 
 taxiRate(2).
-walkLimit(15).
+walkLimit(10).
 
 package(a, g).
 package(a, e).
@@ -51,16 +51,25 @@ bus(e,c,2).
 
 % Variables
 taxiRate(2).
-walkLimit(15).
+walkLimit(10).
 
 package(a, d).
 package(a, e).
 package(b, e).
-
+package(e, c).
 % End - initial state
 walk(X, Y):- path(X, Y, Dist, W), W\=rainy, walkLimit(D), D>Dist.
 
 taxi(X, Y, Cost):- path(X, Y, Dist, _), taxiRate(Rate), Cost is D * Rate.
+
+packagelist(X,L):-findall((X,Y),package(X,Y),L).
+
+deliver(X,Y,L):-package(X,Y),packagelist(X,L1),delete(L1,(X,Y),L2),
+		(package(Y,Z)->pickup(Y,Z,L2,L3);true),union(L2,L3,L).
+		
+pickup(X,Y,L2,L3):-(package(X,Y)->union([(X,Y)],L2,L3);union([],L2,L3)).
+
+move(X,Y,L):-(package(A,Y)->deliver(A,Y,L);true).
 
 getallpathsMain(Start, End,Visited, Cost):-
 	aggregate(min(C,V),getallpaths(Start, End, [Start], 0, V, C),min(Cost,Visited)).
