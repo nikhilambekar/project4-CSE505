@@ -58,6 +58,7 @@ package(a, e).
 package(b, e).
 
 % End - initial state
+walk(X, Y):- path(X, Y, Dist, W), W\=rainy, walkLimit(D), D>Dist.
 
 taxi(X, Y, Cost):- path(X, Y, Dist, _), taxiRate(Rate), Cost is D * Rate.
 
