@@ -59,7 +59,7 @@ delivered(Y,L,FL):-delete(L,(_,Y),L1),packagelist(Y,L2),union(L1,L2,FL).
 getEndingWith(End,L,IL):-findall((X,End),member((X,End),L),IL).
 
 % Main function to determine the shortest path through all packages
-paths(Start,Visited, Cost,FL,TotalFare,FinalListRemaining):-
+paths(Start,Visited, Cost,TotalFare):-
 allPackagelist(FinalList),aggregate(min(C,V),(tour(Start, End, V, C,[],FL,TotalFare,FinalList,FinalListRemaining)),min(Cost,Visited)),!.
 
 % Function to get all paths through all nodes of the delivery and pickup list
