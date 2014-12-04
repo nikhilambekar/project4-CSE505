@@ -8,9 +8,10 @@ path(a, b, 2, sunny).
 path(a, d, 12, sunny).
 path(b, d, 8, sunny).
 path(c, e, 3, sunny).
+edge(X,Y,D) :- path(X,Y,D,_),!.
+edge(X,Y,D) :- path(Y,X,D,_),!.
 
-
-% Bus Paths 		   
+%  		   
 bus(b,a,2).
 bus(a,d,4).
 bus(d,e,6).
@@ -26,9 +27,6 @@ package(d, c).
 package(c, b).
 
 % End - initial state
-
-edge(X,Y,D) :- path(X,Y,D,_),!.
-edge(X,Y,D) :- path(Y,X,D,_),!.
 
 % Check if List is Empty
 isEmpty([]):-true.
@@ -62,7 +60,7 @@ getEndingWith(End,L,IL):-findall((X,End),member((X,End),L),IL).
 
 % Main function to determine the shortest path through all packages
 paths(Start,Visited, Cost,FL,TotalFare,FinalListRemaining):-
-allPackagelist(FinalList),aggregate(min(C,V),(tour(Start, End, V, C,[],FL,TotalFar,FinalList,FinalListRemaining)),min(Cost,Visited)).
+allPackagelist(FinalList),aggregate(min(C,V),(tour(Start, End, V, C,[],FL,TotalFare,FinalList,FinalListRemaining)),min(Cost,Visited)),!.
 
 % Function to get all paths through all nodes of the delivery and pickup list
 % A starting node is provided recursively cost and paths is calculated
